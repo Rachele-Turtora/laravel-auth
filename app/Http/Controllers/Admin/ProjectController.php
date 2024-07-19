@@ -41,6 +41,8 @@ class ProjectController extends Controller
 
         $project->save();
 
+        $data = $request->validated();
+
         return redirect()->route('admin.projects.show', $project->id)->with('message', 'Progetto creato con successo');
     }
 
@@ -68,6 +70,8 @@ class ProjectController extends Controller
         $data = $request->all();
 
         $project->update($data);
+
+        $data = $request->validated();
 
         return redirect()->route('admin.projects.show', $project->id)->with('message', 'Progetto modificato con successo');
     }
