@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Guest\ProjectController as GuestProjectController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,10 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Rotte pubbliche
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/projects', [GuestProjectController::class, 'index']);
+
+
+// Rotte private
 Route::middleware('auth', 'verified')
     ->name('admin.')
     ->prefix('admin')
