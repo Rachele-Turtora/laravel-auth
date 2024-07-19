@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -38,12 +39,13 @@ class ProjectController extends Controller
 
         $project->title = $data['title'];
         $project->description = $data['description'];
+        $project->slug = Str::of($project->title)->slug('-');
 
         $project->save();
 
         $data = $request->validated();
 
-        return redirect()->route('admin.projects.show', $project->id)->with('message', 'Progetto creato con successo');
+        return redirect()->route('admin.projects.show', $project->slug)->with('message', 'Progetto creato con successo');
     }
 
     /**
@@ -69,11 +71,13 @@ class ProjectController extends Controller
     {
         $data = $request->all();
 
+        $data['slug'] = Str::of($project->title)->slug('-');
+
         $project->update($data);
 
         $data = $request->validated();
 
-        return redirect()->route('admin.projects.show', $project->id)->with('message', 'Progetto modificato con successo');
+        return redirect()->route('admin.projects.show', $project->slug)->with('message', 'Progetto modificato con successo');
     }
 
     /**

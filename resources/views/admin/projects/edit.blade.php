@@ -3,7 +3,7 @@
 @section('content')
 <h2 class="m-2">Modifica il progetto</h2>
 
-<form action="{{route('admin.projects.update', $project->id)}}" method="POST" class="m-3">
+<form action="{{route('admin.projects.update', $project)}}" method="POST" class="m-3">
     @csrf
     @method('PUT')
 
