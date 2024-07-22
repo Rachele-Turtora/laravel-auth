@@ -23,7 +23,8 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'title' => 'required|min:5|max:55|string|unique:projects',
-            'description' => 'min:5|string'
+            'description' => 'min:5|string',
+            'cover_img' => 'nullable|image|max:2048'
         ];
     }
 
@@ -36,7 +37,9 @@ class StoreProjectRequest extends FormRequest
             'title.string' => 'Il titolo deve essere una stringa',
             'title.unique' => 'Questo titolo esiste già',
             'description.min' => 'La descrizione deve contenere minimo 5 caratteri',
-            'description.string' => 'La descrizione deve essere una stringa'
+            'description.string' => 'La descrizione deve essere una stringa',
+            'cover_img.image' => 'Il file deve essere un\'immagine',
+            'cover_img.max' => 'Il file può essere al massimo di 2MB'
         ];
     }
 }
