@@ -29,6 +29,22 @@
         @endforeach
         @endif
     </div>
+    <div class="mb-3">
+        <label for="cover-img" class="form-label">Cover image</label>
+        @if ($project->cover_img)
+        <div class="mb-2">
+            <span id="current-img-name">{{ basename($project->cover_img) }}</span>
+        </div>
+        @endif
+        <input class="form-control @if ($errors->get('cover_img')) is-invalid @endif" type="file" name="cover_img" id="cover-img" onchange="updateFileName(this)">
+        @if ($errors->get('cover_img'))
+        @foreach ($errors->get('cover_img') as $message)
+        <div class="invalid-feedback">
+            {{$message}}
+        </div>
+        @endforeach
+        @endif
+    </div>
     <button type="submit" class="btn btn-outline-secondary">Modifica progetto</button>
 </form>
 @endsection

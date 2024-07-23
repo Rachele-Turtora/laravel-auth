@@ -36,7 +36,8 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
-        $img_path = Storage::put('uploads', $data['cover_img']);
+        //$img_path = $request->hasFile('cover_img') ? Storage::put('uploads', $data['cover_img']) : NULL;
+        $img_path = $request->hasFile('cover_img') ? $request->cover_img->store('uploads') : NULL;
 
         $project = new Project();
 
